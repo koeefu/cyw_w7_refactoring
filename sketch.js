@@ -18,9 +18,9 @@ function setup() {
     h2 = random(0, 222);
   }
 
-  for(let i = 0; i < 5; i ++) {
+  for(let i = 0; i < 10; i ++) {
     for (let j = 0; j < 4; j ++) {
-      let n = i + 5 * j;
+      let n = i + 10 * j;
       apples[n] = new appleBG(100*i, 100*j);
     }
   }
@@ -38,7 +38,7 @@ function draw() {
 
   for (let i =0; i < apples.length; i++) {
     apples[i].show();
-    // apples[i].move();
+    apples[i].move();
   }
 
   
@@ -88,23 +88,24 @@ class appleBG {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = frameCount % 400;
+    
     this.e_xpos = 35;
     this.e_ypos = 60;
   }
 
   show() {
-    ellipse(this.e_xpos + this.x, this.e_ypos + this.y, 50, 60);
+    let sp = frameCount%400;
 
-    ellipse(this.e_xpos + 30 + this.x, this.e_ypos + this.y, 50, 60);
+    ellipse(this.e_xpos + this.x + sp, this.e_ypos + this.y, 50, 60);
 
-    triangle(50 + this.x, 30 + this.y, 45 + this.x, 17+ this.y, 55+ this.x, 17 + this.y);
+    ellipse(this.e_xpos + 30 + this.x+ sp, this.e_ypos + this.y, 50, 60);
+
+    triangle(50 + this.x+ sp, 30 + this.y, 45 + this.x+ sp, 17+ this.y, 55+ this.x+ sp, 17 + this.y);
   }
+
   move() {
     if (this.x > width) {
-      this.x = 0;
-    } else {
-      this.x += this.speed;
+      this.x -= 1000;
     }
   }
 }
